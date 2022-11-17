@@ -6,15 +6,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> {
-
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder>
+{
     private ArrayList<Note> noteList;
+    private FragmentManager fragmentManager;
 
-    public NoteAdapter() { noteList = Database.getNotes(); }
+    public NoteAdapter(FragmentManager man, ArrayList <Note> n)
+    {
+        fragmentManager = man;
+        noteList = n;
+    }
 
     //Creates an empty view of a single row - inflate a vacation_row_item
     @NonNull
@@ -24,6 +30,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.note_row_item, parent, false);
+
+        //System.out.println("Test");
 
         return new MyViewHolder(view);
     }
@@ -44,7 +52,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         holder.setData(na, position);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         //handles to the view inside one row
         private TextView tvNoteStatus;
@@ -75,6 +83,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
                 }
             });
 
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
         }
 
         public void setData(Note note, int position)
@@ -84,6 +94,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
             tvNoteContents.setText(note.getNoteContents());
             currentPositionInList = position;
             currentNote = note;
+        }
+
+        @Override
+        public void onClick(View view)
+        {
+            DialogShowNote dialog = new DialogShowNote(currentNote);
+            dialog.show(fragmentManager, "");
         }
 
     }

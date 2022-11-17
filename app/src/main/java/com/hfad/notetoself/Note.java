@@ -13,7 +13,8 @@ public class Note {
         this.noteContents = noteContents;
     }
 
-    public String getNoteStatus() {
+    public String getNoteStatus()
+    {
         return noteStatus;
     }
 

@@ -3,8 +3,8 @@ package com.hfad.notetoself;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Database {
-
+public class Database
+{
     private static ArrayList<Note> noteList;
 
     public static ArrayList<Note> getNotes()
@@ -15,6 +15,11 @@ public class Database {
         }
 
         return noteList;
+    }
+
+    public static void addNote(String noteStatus, String noteTitle, String noteContents)
+    {
+        noteList.add(new Note(noteStatus, noteTitle, noteContents));
     }
 
     private static void loadData()
@@ -57,10 +62,12 @@ public class Database {
         contents.add("Gothic architecture.");
         contents.add("Quiz on Robinson Crusoe.");
 
-        for (int i = 0; i < statuses.size(); i++)
+        for (int i = 0; i < contents.size(); i++)
         {
             noteList.add(new Note(statuses.get(i), titles.get(i), contents.get(i)));
         }
+
+        //System.out.println(noteList.size());
     }
 
 }
