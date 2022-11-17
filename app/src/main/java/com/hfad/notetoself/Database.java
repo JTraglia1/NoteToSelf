@@ -66,8 +66,5 @@ public class Database
         {
             noteList.add(new Note(statuses.get(i), titles.get(i), contents.get(i)));
         }
-
-        //System.out.println(noteList.size());
     }
-
 }

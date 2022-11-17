@@ -31,8 +31,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder>
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.note_row_item, parent, false);
 
-        //System.out.println("Test");
-
         return new MyViewHolder(view);
     }
 
